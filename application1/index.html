@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ZenFlow — Premium Mindfulness & Energy Tracker</title>
+  <meta name="description" content="ZenFlow is an ultra-premium, interactive web-based mobile application designed for visual excellence and mental wellness.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Phone Frame Chassis Shell -->
+  <div class="phone-frame">
+    <div class="viewport">
+      
+      <!-- ==================== DASHBOARD TAB ==================== -->
+      <section id="screen-dashboard" class="screen active">
+        <div class="header-row">
+          <div>
+            <span class="header-subtitle">Welcome back, Saisaran</span>
+            <h1 class="header-title">ZenFlow</h1>
+          </div>
+          <!-- Profile Glowing Icon -->
+          <div style="width: 42px; height: 42px; border-radius: 50%; border: 2px solid var(--accent-purple); box-shadow: var(--shadow-glow-purple); overflow: hidden; display: flex; align-items: center; justify-content: center; background: var(--bg-glass);">
+            <svg viewBox="0 0 24 24" width="24" height="24" stroke="var(--accent-purple)" stroke-width="2" fill="none">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Central Flow Score Ring -->
+        <div class="card-glass circle-progress-container" style="text-align: center;">
+          <div style="position: absolute; top: 12px; left: 16px; font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Flow Score</div>
+          <div class="circle-svg-wrapper">
+            <svg viewBox="0 0 160 160">
+              <defs>
+                <linearGradient id="glowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="var(--accent-purple)"></stop>
+                  <stop offset="100%" stop-color="var(--accent-cyan)"></stop>
+                </linearGradient>
+              </defs>
+              <circle class="circle-bg" cx="80" cy="80" r="70"></circle>
+              <circle id="flow-circle-progress" class="circle-progress" cx="80" cy="80" r="70"></circle>
+            </svg>
+            <div class="circle-info">
+              <span id="flow-value-display" class="circle-val">0%</span>
+              <span class="circle-unit">Zen State</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Liquid Water Tracker -->
+        <div class="card-glass" style="padding: 12px;">
+          <div class="liquid-canvas-container">
+            <canvas id="liquid-canvas"></canvas>
+            <div class="water-ui">
+              <div class="water-text">
+                <p>Hydration Tracker</p>
+                <h4 id="water-logged-text">0 / 2000 ml</h4>
+              </div>
+              <button class="btn-secondary" id="btn-water-reset">Reset</button>
+            </div>
+          </div>
+          <div class="water-buttons">
+            <button class="btn-primary" id="btn-add-water">
+              <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none">
+                <path d="M12 5v14M5 12h14"></path>
+              </svg>
+              Log 250ml
+            </button>
+          </div>
+        </div>
+
+        <!-- Mood Morph Grid -->
+        <div class="card-glass">
+          <h3 class="mood-title">Energy State</h3>
+          <div class="mood-selector">
+            <button class="mood-btn" data-mood="creative">
+              <span class="emoji">🧬</span>
+              <span class="label">Creative</span>
+            </button>
+            <button class="mood-btn" data-mood="focused">
+              <span class="emoji">🧠</span>
+              <span class="label">Focus</span>
+            </button>
+            <button class="mood-btn" data-mood="serene">
+              <span class="emoji">🌌</span>
+              <span class="label">Serene</span>
+            </button>
+            <button class="mood-btn" data-mood="energetic">
+              <span class="emoji">⚡</span>
+              <span class="label">Active</span>
+            </button>
+            <button class="mood-btn" data-mood="fatigued">
+              <span class="emoji">💤</span>
+              <span class="label">Rest</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== BREATHING TAB ==================== -->
+      <section id="screen-breathing" class="screen">
+        <div class="header-row">
+          <div>
+            <span class="header-subtitle">Respiration Guide</span>
+            <h1 class="header-title">Aura Breathing</h1>
+          </div>
+        </div>
+
+        <!-- Dynamic Particle Canvas -->
+        <div class="breathing-coach-box">
+          <div class="breathing-canvas-container">
+            <canvas id="breathing-canvas"></canvas>
+            <div class="breathing-text-overlay">
+              <div id="breathing-phase" class="breath-phase">Ready</div>
+              <div id="breathing-timer" class="breath-timer">0.0s</div>
+            </div>
+          </div>
+
+          <div class="breathing-instructions">
+            <p>Tap and drag on the aura to disrupt the orbits. Experience the **kinetic feedback** and sync with the expanding glowing aura. We practice the **4-2-4-2 breathing cycle** to re-align your neural rhythm.</p>
+          </div>
+
+          <button class="btn-primary" id="btn-breathing-toggle" style="width: 100%; margin-top: 10px;">
+            Start Breathing Session
+          </button>
+        </div>
+      </section>
+
+      <!-- ==================== SOUNDSCAPES TAB ==================== -->
+      <section id="screen-soundscapes" class="screen">
+        <div class="header-row">
+          <div>
+            <span class="header-subtitle">Binaural Synthesis</span>
+            <h1 class="header-title">Zen Audio</h1>
+          </div>
+        </div>
+
+        <div class="soundscapes-container">
+          <!-- Canvas Frequency Wave Visualizer -->
+          <div class="card-glass visualizer-card">
+            <canvas id="visualizer-canvas"></canvas>
+            <div class="visualizer-overlay">
+              <h4>Audio Waveform</h4>
+              <p id="visualizer-subtitle">Ambient synthesizer silent</p>
+            </div>
+          </div>
+
+          <!-- Sound Options List -->
+          <div class="sound-track-list">
+            <!-- Option 1: Binaural Zen Pad -->
+            <div class="sound-track" data-track="pad">
+              <div class="track-details">
+                <div class="track-icon">
+                  <svg viewBox="0 0 24 24" stroke="currentColor" fill="none">
+                    <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"></path>
+                    <path d="M12 6a6 6 0 1 0 6 6 6 6 0 0 0-6-6z"></path>
+                  </svg>
+                </div>
+                <div class="track-info">
+                  <h5>Binaural Zen Pad</h5>
+                  <p>Coherent 6Hz calming delta waves</p>
+                </div>
+              </div>
+              <div class="play-state-indicator">
+                <svg class="play-svg" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="currentColor">
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+              </div>
+            </div>
+            <div class="track-volume-slider">
+              <span style="font-size: 10px; color: var(--text-secondary);">Volume</span>
+              <input type="range" class="slider-custom volume-slider" min="0" max="100" value="80">
+            </div>
+
+            <!-- Option 2: Cosmic Drone -->
+            <div class="sound-track" data-track="drone">
+              <div class="track-details">
+                <div class="track-icon">
+                  <svg viewBox="0 0 24 24" stroke="currentColor" fill="none">
+                    <path d="M12 3v18M3 12h18M12 3a9 9 0 0 1 9 9 9 9 0 0 1-9 9 9 9 0 0 1-9-9 9 9 0 0 1 9-9z"></path>
+                  </svg>
+                </div>
+                <div class="track-info">
+                  <h5>Resonant Cosmic Drone</h5>
+                  <p>Deep analog sub pads & spatial filter sweeps</p>
+                </div>
+              </div>
+              <div class="play-state-indicator">
+                <svg class="play-svg" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="currentColor">
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+              </div>
+            </div>
+            <div class="track-volume-slider">
+              <span style="font-size: 10px; color: var(--text-secondary);">Volume</span>
+              <input type="range" class="slider-custom volume-slider" min="0" max="100" value="80">
+            </div>
+
+            <!-- Option 3: Filtered Rainfall -->
+            <div class="sound-track" data-track="rain">
+              <div class="track-details">
+                <div class="track-icon">
+                  <svg viewBox="0 0 24 24" stroke="currentColor" fill="none">
+                    <path d="M20 17.58A5 5 0 0 0 18 8h-1.26A8 8 0 1 0 4 16.25M8 16v6M12 16v6M16 16v6"></path>
+                  </svg>
+                </div>
+                <div class="track-info">
+                  <h5>Filtered Synthesized Rain</h5>
+                  <p>Soft noise drops & high-pass sweeps</p>
+                </div>
+              </div>
+              <div class="play-state-indicator">
+                <svg class="play-svg" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="currentColor">
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+              </div>
+            </div>
+            <div class="track-volume-slider">
+              <span style="font-size: 10px; color: var(--text-secondary);">Volume</span>
+              <input type="range" class="slider-custom volume-slider" min="0" max="100" value="80">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== ANALYTICS TAB ==================== -->
+      <section id="screen-analytics" class="screen">
+        <div class="header-row">
+          <div>
+            <span class="header-subtitle">Performance</span>
+            <h1 class="header-title">Mind Analytics</h1>
+          </div>
+        </div>
+
+        <!-- Weekly Summary Card -->
+        <div class="metrics-grid">
+          <div class="card-glass metric-card">
+            <div class="metric-icon" style="background: var(--accent-purple-glow); color: var(--accent-purple);">
+              <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+              </svg>
+            </div>
+            <span class="metric-label">Avg Flow</span>
+            <span class="metric-val">82%</span>
+            <span class="metric-sub">+4.5% vs last wk</span>
+          </div>
+
+          <div class="card-glass metric-card">
+            <div class="metric-icon" style="background: var(--accent-cyan-glow); color: var(--accent-cyan);">
+              <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+            </div>
+            <span class="metric-label">Mood Streak</span>
+            <span id="streak-display-value" class="metric-val">3 Days</span>
+            <span class="metric-sub">Highly consistent</span>
+          </div>
+        </div>
+
+        <!-- Custom SVG Line Chart Card -->
+        <div class="card-glass" style="padding-top: 10px;">
+          <h4 style="font-family: var(--font-display); font-size: 15px; font-weight: 600;">Zen Path (Past 7 Days)</h4>
+          <div class="chart-container">
+            <svg class="chart-svg" id="analytics-svg" viewBox="0 0 350 180">
+              <defs>
+                <linearGradient id="chartGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="var(--accent-purple)"></stop>
+                  <stop offset="100%" stop-color="var(--accent-pink)"></stop>
+                </linearGradient>
+                <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="var(--accent-purple)" stop-opacity="0.5"></stop>
+                  <stop offset="100%" stop-color="var(--accent-purple)" stop-opacity="0"></stop>
+                </linearGradient>
+              </defs>
+              <!-- Grid Lines -->
+              <line x1="30" y1="30" x2="330" y2="30" stroke="rgba(255,255,255,0.03)" stroke-width="1"></line>
+              <line x1="30" y1="75" x2="330" y2="75" stroke="rgba(255,255,255,0.03)" stroke-width="1"></line>
+              <line x1="30" y1="120" x2="330" y2="120" stroke="rgba(255,255,255,0.03)" stroke-width="1"></line>
+              <line x1="30" y1="150" x2="330" y2="150" stroke="rgba(255,255,255,0.08)" stroke-width="1.5"></line>
+              
+              <!-- Smooth Bezier Area -->
+              <path class="chart-area" d="M 30 150 Q 70 120, 110 80 T 190 60 T 270 45 T 330 35 L 330 150 Z"></path>
+              
+              <!-- Smooth Bezier Line -->
+              <path class="chart-line" d="M 30 150 Q 70 120, 110 80 T 190 60 T 270 45 T 330 35"></path>
+              
+              <!-- Dynamic Nodes -->
+              <circle cx="30" cy="150" r="4.5" fill="#fff" stroke="var(--accent-purple)" stroke-width="2" filter="drop-shadow(0 0 3px var(--accent-purple))"></circle>
+              <circle cx="110" cy="80" r="4.5" fill="#fff" stroke="var(--accent-purple)" stroke-width="2" filter="drop-shadow(0 0 3px var(--accent-purple))"></circle>
+              <circle cx="190" cy="60" r="4.5" fill="#fff" stroke="var(--accent-purple)" stroke-width="2" filter="drop-shadow(0 0 3px var(--accent-purple))"></circle>
+              <circle cx="270" cy="45" r="4.5" fill="#fff" stroke="var(--accent-purple)" stroke-width="2" filter="drop-shadow(0 0 3px var(--accent-purple))"></circle>
+              <circle cx="330" cy="35" r="5.5" fill="#fff" stroke="var(--accent-pink)" stroke-width="2" filter="drop-shadow(0 0 4px var(--accent-pink))"></circle>
+              
+              <!-- Labels -->
+              <text x="30" y="170" fill="var(--text-muted)" font-size="9" text-anchor="middle">Mon</text>
+              <text x="80" y="170" fill="var(--text-muted)" font-size="9" text-anchor="middle">Tue</text>
+              <text x="130" y="170" fill="var(--text-muted)" font-size="9" text-anchor="middle">Wed</text>
+              <text x="180" y="170" fill="var(--text-muted)" font-size="9" text-anchor="middle">Thu</text>
+              <text x="230" y="170" fill="var(--text-muted)" font-size="9" text-anchor="middle">Fri</text>
+              <text x="280" y="170" fill="var(--text-muted)" font-size="9" text-anchor="middle">Sat</text>
+              <text x="330" y="170" fill="var(--text-muted)" font-size="9" text-anchor="middle">Sun</text>
+            </svg>
+          </div>
+          <div class="analytics-summary">
+            <div class="summary-item">
+              <span class="summary-val">2.8 hr</span>
+              <span class="summary-label">Breathing</span>
+            </div>
+            <div class="summary-item" style="border-left: 1px solid var(--border-glass); border-right: 1px solid var(--border-glass); padding: 0 20px;">
+              <span class="summary-val">4.2 Liters</span>
+              <span class="summary-label">Hydration</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-val">12</span>
+              <span class="summary-label">Zen Logs</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bottom Tab Navigation Bar -->
+      <nav class="tab-bar">
+        <button class="tab-btn active" data-tab="dashboard">
+          <svg viewBox="0 0 24 24">
+            <rect x="3" y="3" width="7" height="9" rx="1"></rect>
+            <rect x="14" y="3" width="7" height="5" rx="1"></rect>
+            <rect x="14" y="12" width="7" height="9" rx="1"></rect>
+            <rect x="3" y="16" width="7" height="5" rx="1"></rect>
+          </svg>
+          <span>Focus</span>
+        </button>
+
+        <button class="tab-btn" data-tab="breathing">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+            <path d="M2 12h20"></path>
+          </svg>
+          <span>Breath</span>
+        </button>
+
+        <button class="tab-btn" data-tab="soundscapes">
+          <svg viewBox="0 0 24 24">
+            <path d="M9 18V5l12-2v13"></path>
+            <circle cx="6" cy="18" r="3"></circle>
+            <circle cx="18" cy="16" r="3"></circle>
+          </svg>
+          <span>Ambient</span>
+        </button>
+
+        <button class="tab-btn" data-tab="analytics">
+          <svg viewBox="0 0 24 24">
+            <line x1="18" y1="20" x2="18" y2="10"></line>
+            <line x1="12" y1="20" x2="12" y2="4"></line>
+            <line x1="6" y1="20" x2="6" y2="14"></line>
+          </svg>
+          <span>Mind</span>
+        </button>
+      </nav>
+
+    </div>
+  </div>
+
+  <!-- Framework Javascript Components -->
+  <script src="js/canvas-breathing.js"></script>
+  <script src="js/canvas-liquid.js"></script>
+  <script src="js/audio-synthesizer.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

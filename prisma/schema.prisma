@@ -1,0 +1,51 @@
+// prisma/schema.prisma
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Log {
+  id             String   @id @default(uuid())
+  timestamp      DateTime @default(now())
+  method         String   // GET, POST, PUT, DELETE
+  path           String   // /api/users, /api/payment, etc.
+  statusCode     Int      // 200, 401, 500, etc.
+  duration       Int      // Duration in ms
+  ip             String   // Client simulated IP
+  userAgent      String   // Simulated browser
+  requestPayload String?  // Stringified JSON payload
+  responseBody   String?  // Stringified JSON response
+  errorMessage   String?  // Error message if any
+  stackTrace     String?  // Stack trace if 500 error
+  
+  @@index([timestamp])
+  @@index([path])
+  @@index([statusCode])
+}
+
+model AlertRule {
+  id          String   @id @default(uuid())
+  name        String   // e.g., "High Latency Rule"
+  metric      String   // latency, errorRate, rps
+  operator    String   // >, <, =
+  threshold   Float    // numeric threshold
+  durationMin Int      // duration to evaluate (minutes)
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  logs        AlertLog[]
+}
+
+model AlertLog {
+  id          String    @id @default(uuid())
+  timestamp   DateTime  @default(now())
+  ruleId      String
+  rule        AlertRule @relation(fields: [ruleId], references: [id], onDelete: Cascade)
+  value       Float     // Trimming value that triggered the alert
+  message     String    // Alert message
+  status      String    // ACTIVE, RESOLVED
+}

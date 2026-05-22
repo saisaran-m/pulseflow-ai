@@ -1,0 +1,387 @@
+/* src/styles/Alerts.module.css */
+
+.splitLayout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .splitLayout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.panel {
+  background-color: var(--bg-card);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: scaleUpFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.panel:hover {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.panel:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.panelHeader {
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.panelTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.createRuleForm {
+  background-color: rgba(255, 255, 255, 0.01);
+  border: 1px dashed var(--border-subtle);
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 580px) {
+  .formRow {
+    grid-template-columns: 1fr;
+  }
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.formLabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.inputField {
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  color: var(--text-primary);
+  outline: none;
+}
+
+.inputField:focus {
+  border-color: var(--color-primary);
+}
+
+.addRuleBtn {
+  background-color: var(--color-primary);
+  color: white;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  box-shadow: 0 4px 10px rgba(99, 102, 241, 0.2);
+  align-self: flex-end;
+  height: 38px;
+}
+
+.addRuleBtn:hover {
+  opacity: 0.95;
+  transform: translateY(-1px);
+}
+
+.rulesList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.ruleCard {
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: border-color 0.2s ease;
+}
+
+.ruleCard:hover {
+  border-color: var(--border-glow);
+}
+
+.ruleInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ruleName {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.ruleSpec {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+}
+
+.ruleActions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.deleteBtn {
+  color: var(--text-muted);
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.deleteBtn:hover {
+  color: var(--status-5xx);
+  background-color: rgba(239, 68, 68, 0.08);
+}
+
+/* Timeline Layout */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-left: 24px;
+  margin-top: 16px;
+}
+
+/* Vertical line */
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 7px;
+  bottom: 8px;
+  width: 2px;
+  background-color: var(--border-subtle);
+}
+
+.timelineItem {
+  position: relative;
+  padding-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.timelineItem:last-child {
+  padding-bottom: 0;
+}
+
+/* Timeline dot */
+.timelineDot {
+  position: absolute;
+  left: -24px;
+  top: 4px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: var(--bg-sidebar);
+  border: 2px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.dotActive {
+  border-color: var(--status-5xx);
+  background-color: var(--status-5xx);
+  box-shadow: 0 0 8px var(--status-5xx);
+  animation: pulseTimelineDot 1.5s infinite ease-in-out;
+}
+
+@keyframes pulseTimelineDot {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.1); opacity: 1; box-shadow: 0 0 12px var(--status-5xx); }
+  100% { transform: scale(0.9); opacity: 0.8; }
+}
+
+.dotResolved {
+  border-color: var(--status-2xx);
+  background-color: var(--status-2xx);
+}
+
+.timelineHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.timelineRuleName {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.timelineTime {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.timelineBody {
+  background-color: rgba(255, 255, 255, 0.01);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.timelineBodyActive {
+  border-color: rgba(239, 68, 68, 0.15);
+  background-color: rgba(239, 68, 68, 0.01);
+}
+
+.timelineMessage {
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--text-secondary);
+}
+
+.timelineFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.timelineBadge {
+  font-size: 9px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.badgeActive {
+  color: var(--status-5xx);
+  background-color: var(--status-5xx-glow);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.badgeResolved {
+  color: var(--status-2xx);
+  background-color: var(--status-2xx-glow);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.resolveBtn {
+  padding: 4px 10px;
+  background-color: rgba(16, 185, 129, 0.1);
+  color: var(--status-2xx);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.resolveBtn:hover {
+  background-color: var(--status-2xx);
+  color: white;
+}
+
+.noAlerts {
+  padding: 40px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Switch UI elements */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 20px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: .2s;
+  border-radius: 20px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
+  background-color: var(--text-primary);
+  transition: .2s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(--status-2xx);
+}
+
+input:checked + .slider:before {
+  transform: translateX(16px);
+}

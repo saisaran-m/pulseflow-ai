@@ -1,0 +1,231 @@
+/* src/app/globals.css */
+
+/* Core Design System Tokens */
+:root {
+  --font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: var(--font-geist-mono), SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+
+  /* Premium Dark Palette */
+  --bg-main: #0B0F19;         /* Very deep dark blue/slate */
+  --bg-card: rgba(17, 24, 39, 0.7); /* Translucent card background */
+  --bg-card-hover: rgba(31, 41, 55, 0.8);
+  --bg-sidebar: #060913;     /* Darker sidebar */
+  --bg-header: rgba(11, 15, 25, 0.8);
+  
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-glow: rgba(255, 255, 255, 0.12);
+  --border-active: rgba(99, 102, 241, 0.4);
+
+  --text-primary: #F3F4F6;   /* Ice white */
+  --text-secondary: #9CA3AF; /* Cool grey */
+  --text-muted: #6B7280;     /* Dimmed grey */
+  
+  /* Glowing Neon Accents */
+  --color-primary: #6366F1;       /* Electric Indigo */
+  --color-primary-glow: rgba(99, 102, 241, 0.15);
+  
+  /* HTTP Status Code Specific Palette */
+  --status-2xx: #10B981;          /* Emerald Green - Success */
+  --status-2xx-glow: rgba(16, 185, 129, 0.15);
+  
+  --status-3xx: #F59E0B;          /* Amber Yellow - Redirect */
+  --status-3xx-glow: rgba(245, 158, 11, 0.15);
+  
+  --status-4xx: #F97316;          /* Orange - Client Error */
+  --status-4xx-glow: rgba(249, 115, 22, 0.15);
+  
+  --status-5xx: #EF4444;          /* Rose Red - Server Crash */
+  --status-5xx-glow: rgba(239, 68, 68, 0.15);
+  
+  /* Gemini AI Specific Glowing Accents */
+  --color-ai: #A855F7;            /* Bright Purple */
+  --color-ai-glow: rgba(168, 85, 247, 0.2);
+  --color-ai-gradient: linear-gradient(135deg, #A855F7 0%, #6366F1 100%);
+  
+  /* Layout Sizing */
+  --sidebar-width: 260px;
+  --header-height: 70px;
+}
+
+/* Global Reset & Base Rules */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  font-size: 14px;
+  line-height: 1.5;
+  height: 100%;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Subtle Glowing Cyber Grid Background */
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.007) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.007) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Scrollbar customization */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Core Utility Animations */
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 5px var(--glow-color, rgba(99, 102, 241, 0.2));
+  }
+  50% {
+    box-shadow: 0 0 15px var(--glow-color, rgba(99, 102, 241, 0.4));
+  }
+  100% {
+    box-shadow: 0 0 5px var(--glow-color, rgba(99, 102, 241, 0.2));
+  }
+}
+
+@keyframes slideInDrawer {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+/* Base button defaults */
+button {
+  font-family: var(--font-family);
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+  outline: none;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+input, select, textarea {
+  font-family: var(--font-family);
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+/* Glow classes */
+.glow-primary {
+  --glow-color: rgba(99, 102, 241, 0.3);
+  animation: pulseGlow 2s infinite ease-in-out;
+}
+
+.glow-2xx {
+  --glow-color: rgba(16, 185, 129, 0.3);
+  animation: pulseGlow 2s infinite ease-in-out;
+}
+
+.glow-5xx {
+  --glow-color: rgba(239, 68, 68, 0.3);
+  animation: pulseGlow 2s infinite ease-in-out;
+}
+
+.glow-ai {
+  --glow-color: rgba(168, 85, 247, 0.4);
+  animation: pulseGlow 2s infinite ease-in-out;
+}
+
+/* Ambient Floating Neon Blobs */
+.ambient-glow {
+  position: fixed;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  filter: blur(160px);
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.blob-1 {
+  background: radial-gradient(circle, var(--color-primary) 0%, transparent 70%);
+  top: -150px;
+  right: -50px;
+  animation: floatBlob 25s infinite ease-in-out alternate;
+}
+
+.blob-2 {
+  background: radial-gradient(circle, var(--color-ai) 0%, transparent 70%);
+  bottom: -150px;
+  left: -50px;
+  animation: floatBlob 30s infinite ease-in-out alternate-reverse;
+}
+
+@keyframes floatBlob {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(60px, 30px) scale(1.15);
+  }
+  100% {
+    transform: translate(-30px, -50px) scale(0.9);
+  }
+}
+
+/* Premium Card Scale Entrance Animation */
+@keyframes scaleUpFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
