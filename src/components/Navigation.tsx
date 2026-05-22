@@ -55,7 +55,7 @@ export default function Navigation({ children }: NavigationProps) {
             <span>PulseEngine Active</span>
           </div>
           <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
-            v1.2.0 • SQLite Dev DB
+            v1.2.0 • Cloud Observability
           </div>
         </div>
       </aside>
