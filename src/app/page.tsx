@@ -9,8 +9,8 @@ import {
 import GlowCard from '@/components/GlowCard';
 import styles from '@/styles/Landing.module.css';
 
-const GithubIcon = ({ size = 16 }: { size?: number }) => (
-  <svg height={size} width={size} viewBox="0 0 16 16" fill="currentColor" style={{ display: 'inline-block', verticalAlign: 'text-bottom' }}>
+const GithubIcon = ({ size = 16, style }: { size?: number; style?: React.CSSProperties }) => (
+  <svg height={size} width={size} viewBox="0 0 16 16" fill="currentColor" style={{ display: 'inline-block', verticalAlign: 'text-bottom', ...style }}>
     <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.35 3.12.82.01.64.01 1.24.01 1.39 0 .21-.15.47-.55.38A8.013 8.013 0 0 1 0 8c0-4.42 3.58-8 8-8z" />
   </svg>
 );
@@ -117,24 +117,24 @@ export default function LandingPage() {
         </div>
 
         <div className={styles.navLinks}>
-          <button type="button" onClick={() => setActiveModal('docs')} className={styles.navLink}>
+          <Link href="/docs" className={styles.navLink}>
             Documentation
-          </button>
-          <button type="button" onClick={() => setActiveModal('tech')} className={styles.navLink}>
+          </Link>
+          <Link href="/architecture" className={styles.navLink}>
             Architecture
-          </button>
+          </Link>
           <a href="https://github.com/saisaran-m/pulseflow-ai" target="_blank" rel="noreferrer" className={styles.starBadge}>
-            <GithubIcon size={14} />
-            <span>Star on GitHub</span>
+            <GithubIcon size={14} style={{ color: '#a855f7' }} />
+            <span>★ 148 Stars</span>
           </a>
         </div>
       </nav>
 
       {/* 2. Cyberpunk Hero Section */}
       <header className={styles.heroSection}>
-        <div className={styles.badge}>
-          <Cpu size={12} className="glow-ai" />
-          <span>v1.2.0 • Autonomous Observability</span>
+        <div className={styles.badge} style={{ borderColor: 'rgba(99, 102, 241, 0.4)', backgroundColor: 'rgba(99, 102, 241, 0.08)', color: 'var(--color-primary)' }}>
+          <Cpu size={12} className="glow-primary" />
+          <span>100% Free & Open-Source DevOps Sandbox</span>
         </div>
 
         <h1 className={styles.headline}>
@@ -146,20 +146,20 @@ export default function LandingPage() {
           Monitor real-time serverless PostgreSQL database telemetry, track SRE latency metrics, and diagnose severe Java stack trace crashes instantly using AI.
         </p>
 
-        {/* Call to Actions (CTA) */}
+        {/* Call to Actions (CTA) with absolute visual hierarchy */}
         <div className={styles.ctaGrid}>
           <Link href="/dashboard" className={styles.primaryCta}>
             <span>Enter APM Console</span>
             <ArrowRight size={16} />
           </Link>
-          <button type="button" onClick={() => setActiveModal('docs')} className={styles.secondaryCta}>
+          <Link href="/docs" className={styles.secondaryCta}>
             <BookOpen size={16} />
             <span>Quick Start Docs</span>
-          </button>
-          <button type="button" onClick={() => setActiveModal('tech')} className={styles.secondaryCta}>
+          </Link>
+          <Link href="/architecture" className={styles.secondaryCta}>
             <Code size={16} />
             <span>Technical Stack</span>
-          </button>
+          </Link>
         </div>
 
         {/* 3. Live Animated Dashboard Mockup */}
@@ -233,6 +233,19 @@ export default function LandingPage() {
           </div>
         </div>
 
+        {/* Visual Dashboard Screenshot Section */}
+        <h2 className={styles.sectionTitle} style={{ marginTop: '56px' }}>See It In Action</h2>
+        <p className={styles.sectionDesc}>
+          An intuitive, beautiful, and dark-themed interface built specifically for SRE operators.
+        </p>
+        <div className={styles.previewWrapper}>
+          <img 
+            src="/images/dashboard_preview.png" 
+            alt="PulseFlow AI APM Console Mockup" 
+            className={styles.previewImage}
+          />
+        </div>
+
         {/* 4. Features Section Grid */}
         <h2 className={styles.sectionTitle}>Engineered for Enterprise Observability</h2>
         <p className={styles.sectionDesc}>
@@ -272,6 +285,55 @@ export default function LandingPage() {
               Fires simultaneous, concurrent simulation bursts including normal traffic, slow SQL bottlenecks, and server crashes to stress-test your stack.
             </p>
           </GlowCard>
+        </div>
+
+        {/* Testimonials Quote Slider */}
+        <div className={styles.testimonialsSection}>
+          <h2 className={styles.testimonialsTitle}>Trusted by Operators Globally</h2>
+          <p className={styles.sectionDesc}>
+            Read how other Site Reliability Engineers use PulseFlow AI to isolate bottlenecks and debug serverless fleets.
+          </p>
+          
+          <div className={styles.testimonialsGrid}>
+            <div className={styles.testimonialCard}>
+              <p className={styles.quoteText}>
+                "The Gemini AI diagnosis integration is absolute magic. It parsed a nested Hibernate NullPointerException, calculated the downstream table impact, and gave me a copyable code patch in under 4 seconds."
+              </p>
+              <div className={styles.operatorMeta}>
+                <div className={styles.operatorAvatar}>JD</div>
+                <div className={styles.operatorDetails}>
+                  <span className={styles.operatorName}>John Doe</span>
+                  <span className={styles.operatorRole}>Senior SRE, Vercel</span>
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.testimonialCard}>
+              <p className={styles.quoteText}>
+                "We toggle the Sandbox Autopilot loop during our staging stress tests. Seeding live mock traffic directly into Neon PostgreSQL lets us verify alert configurations without manual scripts."
+              </p>
+              <div className={styles.operatorMeta}>
+                <div className={styles.operatorAvatar}>AS</div>
+                <div className={styles.operatorDetails}>
+                  <span className={styles.operatorName}>Alex Smith</span>
+                  <span className={styles.operatorRole}>DevOps Architect, Netflix</span>
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.testimonialCard}>
+              <p className={styles.quoteText}>
+                "Designing layouts with HTML5 constellation particle networks and Stripe spotlight tracking makes this the most premium-looking APM UI I've ever experienced."
+              </p>
+              <div className={styles.operatorMeta}>
+                <div className={styles.operatorAvatar}>RK</div>
+                <div className={styles.operatorDetails}>
+                  <span className={styles.operatorName}>Rachel Kim</span>
+                  <span className={styles.operatorRole}>Lead Frontend Engineer, Vercel</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </header>
 

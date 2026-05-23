@@ -41,23 +41,71 @@ export default function Navigation({ children }: NavigationProps) {
 
   if (!authorized) {
     return (
-      <div style={{
-        height: '100vh',
-        width: '100vw',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        background: 'radial-gradient(circle at 50% 50%, #0c0b14 0%, #050508 100%)',
-        color: 'var(--text-secondary)',
-        gap: '16px',
-        fontFamily: 'var(--font-family)'
-      }}>
-        <div style={{ width: '20px', height: '20px', border: '2px solid rgba(168, 85, 247, 0.2)', borderTopColor: 'var(--color-ai)', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
-        <span style={{ fontSize: '11px', letterSpacing: '1px', textTransform: 'uppercase', fontWeight: 700, color: 'var(--text-muted)' }}>Securing Operator Node...</span>
+      <div style={{ minHeight: '100vh', position: 'relative', background: 'radial-gradient(circle at 50% 50%, #0c0b14 0%, #050508 100%)', overflow: 'hidden' }}>
+        {/* 1. Skeleton Sidebar */}
+        <aside className={styles.sidebar} style={{ borderRight: '1px solid rgba(255, 255, 255, 0.03)' }}>
+          <div className={styles.brand}>
+            <div className={styles.logoGlow} style={{ opacity: 0.6 }}>
+              <Terminal size={18} />
+            </div>
+            <span className={styles.brandName}>PulseFlow AI</span>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginTop: '20px' }}>
+            {[1, 2, 3, 4].map((i) => (
+              <div key={i} className="pulse-skeleton" style={{ height: '38px', width: '100%', borderRadius: '8px', backgroundColor: 'rgba(255, 255, 255, 0.02)', border: '1px solid rgba(255, 255, 255, 0.01)' }} />
+            ))}
+          </div>
+
+          <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: '12px', borderTop: '1px solid rgba(255, 255, 255, 0.03)', paddingTop: '20px' }}>
+            <div className="pulse-skeleton" style={{ height: '34px', width: '100%', borderRadius: '8px', backgroundColor: 'rgba(239, 68, 68, 0.01)', border: '1px solid rgba(239, 68, 68, 0.03)' }} />
+            <div className="pulse-skeleton" style={{ height: '14px', width: '60%', borderRadius: '4px', backgroundColor: 'rgba(255, 255, 255, 0.02)' }} />
+          </div>
+        </aside>
+
+        {/* 2. Skeleton Header */}
+        <header className={styles.header} style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.03)' }}>
+          <div className="pulse-skeleton" style={{ height: '20px', width: '150px', borderRadius: '4px', backgroundColor: 'rgba(255, 255, 255, 0.03)' }} />
+          <div className="pulse-skeleton" style={{ height: '24px', width: '120px', borderRadius: '12px', backgroundColor: 'rgba(168, 85, 247, 0.03)', border: '1px solid rgba(168, 85, 247, 0.05)' }} />
+        </header>
+
+        {/* 3. Skeleton Content Panel */}
+        <main className={styles.contentWrapper}>
+          <div className={styles.mainContainer}>
+            {/* Operator Authorization Bar */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', backgroundColor: 'rgba(168, 85, 247, 0.02)', border: '1px solid rgba(168, 85, 247, 0.1)', padding: '14px 20px', borderRadius: '8px' }}>
+              <div style={{ width: '14px', height: '14px', border: '2px solid rgba(168, 85, 247, 0.2)', borderTopColor: 'var(--color-ai)', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
+              <span style={{ fontSize: '11px', letterSpacing: '1px', textTransform: 'uppercase', fontWeight: 700, color: 'var(--color-ai)', fontFamily: 'var(--font-mono)' }}>Authenticating SRE Node Session...</span>
+            </div>
+
+            {/* KPI Cards Grid */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '20px', width: '100%' }}>
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="pulse-skeleton" style={{ height: '105px', borderRadius: '12px', backgroundColor: 'rgba(255, 255, 255, 0.02)', border: '1px solid rgba(255, 255, 255, 0.02)' }} />
+              ))}
+            </div>
+
+            {/* Chart Area */}
+            <div className="pulse-skeleton" style={{ height: '320px', borderRadius: '12px', backgroundColor: 'rgba(255, 255, 255, 0.015)', border: '1px solid rgba(255, 255, 255, 0.02)' }} />
+
+            {/* Bottom Grid */}
+            <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '24px', width: '100%' }}>
+              <div className="pulse-skeleton" style={{ height: '240px', borderRadius: '12px', backgroundColor: 'rgba(255, 255, 255, 0.015)', border: '1px solid rgba(255, 255, 255, 0.02)' }} />
+              <div className="pulse-skeleton" style={{ height: '240px', borderRadius: '12px', backgroundColor: 'rgba(255, 255, 255, 0.015)', border: '1px solid rgba(255, 255, 255, 0.02)' }} />
+            </div>
+          </div>
+        </main>
+
         <style dangerouslySetInnerHTML={{ __html: `
           @keyframes spin {
             to { transform: rotate(360deg); }
+          }
+          @keyframes skeleton-pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.9; }
+          }
+          .pulse-skeleton {
+            animation: skeleton-pulse 1.8s infinite ease-in-out;
           }
         `}} />
       </div>

@@ -490,3 +490,118 @@
     justify-content: center;
   }
 }
+
+/* Dashboard Image Preview Section */
+.previewWrapper {
+  width: 100%;
+  max-width: 950px;
+  border-radius: 12px;
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  background-color: rgba(11, 15, 25, 0.5);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(168, 85, 247, 0.05);
+  padding: 10px;
+  margin-bottom: 80px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: scaleUpFadeIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.previewWrapper:hover {
+  transform: scale(1.01) translateY(-2px);
+  border-color: rgba(168, 85, 247, 0.45);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 35px rgba(168, 85, 247, 0.1);
+}
+
+.previewImage {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+}
+
+/* Quote/Testimonial Slider */
+.testimonialsSection {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto 100px auto;
+  padding: 0 24px;
+}
+
+.testimonialsTitle {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.testimonialsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.testimonialCard {
+  background-color: rgba(17, 24, 39, 0.5);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.testimonialCard:hover {
+  border-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(17, 24, 39, 0.7);
+}
+
+.quoteText {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.operatorMeta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.operatorAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-ai-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 13px;
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.3);
+}
+
+.operatorDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.operatorName {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.operatorRole {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+

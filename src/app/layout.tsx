@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "PulseFlow AI | SRE Observability & Diagnostics Hub",
-  description: "Enterprise SaaS DevOps Telemetry & API Observability Hub powered by context-aware Gemini AI diagnostics and real-time P95 trace metrics.",
+  description: "PulseFlow AI monitors your serverless infrastructure in real time, using Gemini AI to diagnose crashes and alert your SRE team instantly.",
 };
 
 export default function RootLayout({
