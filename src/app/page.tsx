@@ -98,17 +98,21 @@ export default function HomeDashboard() {
     setSimulating(scenario);
     try {
       const paths = ['/api/users', '/api/payment', '/api/products', '/api/analytics'];
-      
+      const promises = [];
       for (let i = 0; i < count; i++) {
         const randPath = paths[Math.floor(Math.random() * paths.length)];
         const method = randPath === '/api/payment' ? 'POST' : 'GET';
 
-        await fetch('/api/sandbox', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ scenario, method, path: randPath })
-        });
+        promises.push(
+          fetch('/api/sandbox', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ scenario, method, path: randPath })
+          })
+        );
       }
+      
+      await Promise.all(promises);
       
       // Instantly refresh numbers
       await fetchDashboardData(false);
