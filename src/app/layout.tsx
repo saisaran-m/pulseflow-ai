@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import NetworkCanvas from "@/components/NetworkCanvas";
+import AIAssistantBubble from "@/components/AIAssistantBubble";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,7 +36,11 @@ export default function RootLayout({
         {/* Floating Ambient Glowing Blobs */}
         <div className="ambient-glow blob-1"></div>
         <div className="ambient-glow blob-2"></div>
+        
         {children}
+
+        {/* Interactive SRE Chatbot Bubble */}
+        <AIAssistantBubble />
       </body>
     </html>
   );

@@ -29,6 +29,24 @@ export default function LandingPage() {
   const [simulatedLogs, setSimulatedLogs] = useState<MockConsoleLog[]>([]);
   const mockupRef = useRef<HTMLDivElement | null>(null);
 
+  // Support Form states
+  const [contactEmail, setContactEmail] = useState('');
+  const [contactRole, setContactRole] = useState('SRE');
+  const [contactMessage, setContactMessage] = useState('');
+  const [contactSubmitted, setContactSubmitted] = useState(false);
+  const [contactSubmitting, setContactSubmitting] = useState(false);
+
+  const handleContactSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setContactSubmitting(true);
+    setTimeout(() => {
+      setContactSubmitting(false);
+      setContactSubmitted(true);
+      setContactEmail('');
+      setContactMessage('');
+    }, 1500);
+  };
+
   // Generate rolling SRE logs in the hero mockup console
   useEffect(() => {
     const paths = ['/api/users', '/api/payment', '/api/products', '/api/analytics'];
@@ -332,10 +350,196 @@ export default function LandingPage() {
         </div>
       )}
 
+      {activeModal === 'contact' && (
+        <div className={styles.modalOverlay} onClick={() => setActiveModal(null)}>
+          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.modalHeader}>
+              <div className={styles.modalTitle}>
+                <Terminal size={16} />
+                <span>Contact SRE Command</span>
+              </div>
+              <X size={18} className={styles.modalClose} onClick={() => setActiveModal(null)} />
+            </div>
+            
+            {contactSubmitted ? (
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', padding: '20px 0', gap: '12px' }}>
+                <div style={{ width: '40px', height: '40px', borderRadius: '50%', backgroundColor: 'rgba(16, 185, 129, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--status-2xx)', boxShadow: '0 0 15px rgba(16, 185, 129, 0.2)', margin: '0 auto' }}>
+                  <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5" style={{ margin: 'auto' }}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h3 style={{ fontSize: '16px', fontWeight: 700, color: 'var(--text-primary)' }}>Operator Dispatch Confirmed</h3>
+                <p style={{ fontSize: '12.5px', color: 'var(--text-secondary)', lineHeight: 1.5, maxWidth: '340px' }}>
+                  Your encrypted support ticket has been registered in the Neon cloud node. An SRE response technician will contact you shortly.
+                </p>
+                <button type="button" onClick={() => setActiveModal(null)} className={styles.primaryCta} style={{ padding: '8px 20px', fontSize: '12px', marginTop: '10px' }}>
+                  Close Connection
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleContactSubmit} className={styles.modalContent}>
+                <div className={styles.modalSection}>
+                  <label htmlFor="modal-email" className={styles.modalLabel}>SRE Email Address</label>
+                  <input 
+                    id="modal-email"
+                    type="email" 
+                    required 
+                    placeholder="operator@domain.com"
+                    value={contactEmail}
+                    onChange={(e) => setContactEmail(e.target.value)}
+                    style={{
+                      width: '100%',
+                      backgroundColor: 'rgba(0, 0, 0, 0.3)',
+                      border: '1px solid var(--border-subtle)',
+                      borderRadius: '8px',
+                      padding: '10px 12px',
+                      color: 'var(--text-primary)',
+                      outline: 'none',
+                      fontSize: '13px'
+                    }}
+                  />
+                </div>
+                
+                <div className={styles.modalSection}>
+                  <label htmlFor="modal-role" className={styles.modalLabel}>Operational Role</label>
+                  <select
+                    id="modal-role"
+                    value={contactRole}
+                    onChange={(e) => setContactRole(e.target.value)}
+                    style={{
+                      width: '100%',
+                      backgroundColor: 'rgba(0, 0, 0, 0.3)',
+                      border: '1px solid var(--border-subtle)',
+                      borderRadius: '8px',
+                      padding: '10px 12px',
+                      color: 'var(--text-primary)',
+                      outline: 'none',
+                      fontSize: '13px'
+                    }}
+                  >
+                    <option value="SRE">Site Reliability Engineer (SRE)</option>
+                    <option value="DevOps">DevOps Platform Architect</option>
+                    <option value="Developer">Application Developer</option>
+                    <option value="Student">System Evaluator</option>
+                  </select>
+                </div>
+                
+                <div className={styles.modalSection}>
+                  <label htmlFor="modal-message" className={styles.modalLabel}>Incident Description / Message</label>
+                  <textarea 
+                    id="modal-message"
+                    required 
+                    rows={4} 
+                    placeholder="Describe your serverless query bottleneck or SRE support requirement..."
+                    value={contactMessage}
+                    onChange={(e) => setContactMessage(e.target.value)}
+                    style={{
+                      width: '100%',
+                      backgroundColor: 'rgba(0, 0, 0, 0.3)',
+                      border: '1px solid var(--border-subtle)',
+                      borderRadius: '8px',
+                      padding: '10px 12px',
+                      color: 'var(--text-primary)',
+                      outline: 'none',
+                      fontSize: '13px',
+                      resize: 'none'
+                    }}
+                  />
+                </div>
+                
+                <button 
+                  type="submit" 
+                  disabled={contactSubmitting}
+                  className={styles.primaryCta} 
+                  style={{ width: '100%', justifyContent: 'center', padding: '12px' }}
+                >
+                  {contactSubmitting ? 'Transmitting Package...' : 'Dispatch Ticket'}
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
+
+      {activeModal === 'privacy' && (
+        <div className={styles.modalOverlay} onClick={() => setActiveModal(null)}>
+          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.modalHeader}>
+              <div className={styles.modalTitle}>
+                <ShieldAlert size={16} />
+                <span>Encrypted Privacy Protocol</span>
+              </div>
+              <X size={18} className={styles.modalClose} onClick={() => setActiveModal(null)} />
+            </div>
+            <div className={styles.modalContent} style={{ maxHeight: '350px', overflowY: 'auto', paddingRight: '8px' }}>
+              <div className={styles.modalSection}>
+                <span className={styles.modalLabel}>1. Telemetry Collection</span>
+                <span className={styles.modalValue}>
+                  PulseFlow AI is engineered as a secure DevOps APM sandbox. We collect metadata including HTTP request durations, status code classes, path endpoints, and compiler exception stack traces.
+                </span>
+              </div>
+              <div className={styles.modalSection}>
+                <span className={styles.modalLabel}>2. Zero Sensitive PII Retention</span>
+                <span className={styles.modalValue}>
+                  All request payloads and database rows are generated programmatically or securely sanitized in serverless route layers before processing. We do not store real-world passwords, payment accounts, or identifiable keys.
+                </span>
+              </div>
+              <div className={styles.modalSection}>
+                <span className={styles.modalLabel}>3. Generative Diagnostic Auditing</span>
+                <span className={styles.modalValue}>
+                  Exceptions selected for SRE co-pilot reviews are processed via stateless API boundaries. Stack trace data is fed to Google Gemini models exclusively to compile localized diagnostic recommendation code patches.
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {activeModal === 'terms' && (
+        <div className={styles.modalOverlay} onClick={() => setActiveModal(null)}>
+          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.modalHeader}>
+              <div className={styles.modalTitle}>
+                <Code size={16} />
+                <span>Service Level SLA Terms</span>
+              </div>
+              <X size={18} className={styles.modalClose} onClick={() => setActiveModal(null)} />
+            </div>
+            <div className={styles.modalContent} style={{ maxHeight: '350px', overflowY: 'auto', paddingRight: '8px' }}>
+              <div className={styles.modalSection}>
+                <span className={styles.modalLabel}>1. Evaluation SLA</span>
+                <span className={styles.modalValue}>
+                  This platform is provided exclusively for portfolio evaluation, interview showcase, and SaaS traffic simulation tests. Standard serverless PostgreSQL compute limits are governed by Neon Cloud tiers.
+                </span>
+              </div>
+              <div className={styles.modalSection}>
+                <span className={styles.modalLabel}>2. Autopilot Simulation Policies</span>
+                <span className={styles.modalValue}>
+                  Sandbox traffic autopilot loops inject a maximum of 1 log query every 3 seconds to preserve database resources. High-volume custom concurrent stress tests must be launched responsibly.
+                </span>
+              </div>
+              <div className={styles.modalSection}>
+                <span className={styles.modalLabel}>3. Code Patch Licensing</span>
+                <span className={styles.modalValue}>
+                  All software code suggestions and isolated error patches synthesized by the Gemini AI integration are provided under the Apache 2.0 Open Source framework, granting unrestricted rights for reuse and editing.
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Global Footer */}
       <footer className={styles.footer}>
-        <span>v1.2.0 • PulseFlow AI Cloud Observability Hub</span>
-        <span>Developed by saisaran-m • Open Source Apache 2.0</span>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', textAlign: 'left' }}>
+          <span>v1.2.0 • PulseFlow AI Cloud Observability Hub</span>
+          <span>Developed by saisaran-m • Open Source Apache 2.0</span>
+        </div>
+        <div style={{ display: 'flex', gap: '20px' }}>
+          <button type="button" onClick={() => { setContactSubmitted(false); setActiveModal('contact'); }} className={styles.navLink} style={{ cursor: 'pointer' }}>Contact Operator</button>
+          <button type="button" onClick={() => setActiveModal('privacy')} className={styles.navLink} style={{ cursor: 'pointer' }}>Privacy Protocol</button>
+          <button type="button" onClick={() => setActiveModal('terms')} className={styles.navLink} style={{ cursor: 'pointer' }}>SLA Terms</button>
+        </div>
       </footer>
     </div>
   );
