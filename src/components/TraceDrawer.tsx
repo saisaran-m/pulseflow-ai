@@ -22,16 +22,18 @@ export default function TraceDrawer({ isOpen, onClose, log }: TraceDrawerProps) 
     setAnalyzing(false);
   }, [log]);
 
-  if (!isOpen || !log) return null;
-
-  // Handle escape key to close drawer
+  // Handle escape key to close drawer (moved to comply with Rules of Hooks)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
     };
-    window.addEventListener('keydown', handleKeyDown);
+    if (isOpen) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onClose]);
+  }, [isOpen, onClose]);
+
+  if (!isOpen || !log) return null;
 
   // Pretty-print JSON bodies safely
   const formatJson = (str: string | null) => {
