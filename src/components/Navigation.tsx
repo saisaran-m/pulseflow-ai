@@ -15,17 +15,23 @@ export default function Navigation({ children }: NavigationProps) {
   const pathname = usePathname();
   const router = useRouter();
   const [authorized, setAuthorized] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const session = sessionStorage.getItem('pulseflow_session');
-      if (session !== 'authorized' && session !== 'demo_authorized') {
+      const hasActiveSession = session === 'authorized' || session === 'demo_authorized';
+      setIsLoggedIn(hasActiveSession);
+
+      const isPublicPath = pathname === '/docs' || pathname === '/architecture';
+
+      if (!isPublicPath && !hasActiveSession) {
         router.push('/login');
       } else {
         setAuthorized(true);
       }
     }
-  }, [router]);
+  }, [router, pathname]);
 
   const handleSignOut = () => {
     sessionStorage.removeItem('pulseflow_session');
@@ -141,30 +147,56 @@ export default function Navigation({ children }: NavigationProps) {
         </nav>
 
         <div className={styles.footer}>
-          {/* Sign Out Button */}
-          <button 
-            type="button" 
-            onClick={handleSignOut} 
-            className={styles.navLink}
-            style={{ 
-              padding: '10px 16px',
-              color: 'var(--status-5xx)', 
-              borderColor: 'rgba(239, 68, 68, 0.1)',
-              backgroundColor: 'rgba(239, 68, 68, 0.02)',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              width: '100%',
-              borderRadius: '8px',
-              fontSize: '13px',
-              fontWeight: 600,
-              transition: 'all 0.2s ease',
-              marginBottom: '4px'
-            }}
-          >
-            <LogOut size={16} />
-            <span>Sign Out</span>
-          </button>
+          {/* Sign Out / Sign In Button */}
+          {isLoggedIn ? (
+            <button 
+              type="button" 
+              onClick={handleSignOut} 
+              className={styles.navLink}
+              style={{ 
+                padding: '10px 16px',
+                color: 'var(--status-5xx)', 
+                borderColor: 'rgba(239, 68, 68, 0.1)',
+                backgroundColor: 'rgba(239, 68, 68, 0.02)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px',
+                width: '100%',
+                borderRadius: '8px',
+                fontSize: '13px',
+                fontWeight: 600,
+                transition: 'all 0.2s ease',
+                marginBottom: '4px'
+              }}
+            >
+              <LogOut size={16} />
+              <span>Sign Out</span>
+            </button>
+          ) : (
+            <Link 
+              href="/login" 
+              className={styles.navLink}
+              style={{ 
+                padding: '10px 16px',
+                color: 'var(--color-primary)', 
+                borderColor: 'rgba(99, 102, 241, 0.15)',
+                backgroundColor: 'rgba(99, 102, 241, 0.08)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px',
+                width: '100%',
+                borderRadius: '8px',
+                fontSize: '13px',
+                fontWeight: 700,
+                transition: 'all 0.2s ease',
+                marginBottom: '4px',
+                textDecoration: 'none'
+              }}
+            >
+              <Cpu size={16} className="glow-primary" />
+              <span>Sign In Console</span>
+            </Link>
+          )}
 
           <div className={styles.statusIndicator}>
             <div className={styles.pulseDot}></div>
