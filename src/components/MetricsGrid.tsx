@@ -3,6 +3,7 @@
 
 import React from 'react';
 import { ArrowUpRight, CheckCircle, AlertTriangle, Zap, Server } from 'lucide-react';
+import GlowCard from './GlowCard';
 import styles from '@/styles/Dashboard.module.css';
 
 interface MetricsGridProps {
@@ -37,7 +38,7 @@ export default function MetricsGrid({ metrics }: MetricsGridProps) {
   return (
     <div className={styles.metricsGrid}>
       {/* Card 1: System Throughput */}
-      <div className={`${styles.card} ${styles.cardPrimary}`}>
+      <GlowCard className={`${styles.card} ${styles.cardPrimary}`}>
         <div className={styles.cardHeader}>
           <span className={styles.cardTitle}>Throughput</span>
           <div className={styles.iconWrapper}>
@@ -50,10 +51,10 @@ export default function MetricsGrid({ metrics }: MetricsGridProps) {
             {totalRequests.toLocaleString()} total requests logged
           </span>
         </div>
-      </div>
+      </GlowCard>
 
       {/* Card 2: System Health / Error Rate */}
-      <div className={`${styles.card} ${errorStatus.style}`}>
+      <GlowCard className={`${styles.card} ${errorStatus.style}`}>
         <div className={styles.cardHeader}>
           <span className={styles.cardTitle}>Error Rate</span>
           <div className={styles.iconWrapper}>
@@ -68,10 +69,10 @@ export default function MetricsGrid({ metrics }: MetricsGridProps) {
             {errorStatus.label}
           </span>
         </div>
-      </div>
+      </GlowCard>
 
       {/* Card 3: Average Latency */}
-      <div className={`${styles.card} ${getLatencyState()}`}>
+      <GlowCard className={`${styles.card} ${getLatencyState()}`}>
         <div className={styles.cardHeader}>
           <span className={styles.cardTitle}>Avg Latency</span>
           <div className={styles.iconWrapper}>
@@ -84,10 +85,10 @@ export default function MetricsGrid({ metrics }: MetricsGridProps) {
             Target budget: &lt; 200ms
           </span>
         </div>
-      </div>
+      </GlowCard>
 
       {/* Card 4: P95 Latency */}
-      <div className={`${styles.card} ${p95Latency > 800 ? styles.cardWarning : styles.cardPrimary}`}>
+      <GlowCard className={`${styles.card} ${p95Latency > 800 ? styles.cardWarning : styles.cardPrimary}`}>
         <div className={styles.cardHeader}>
           <span className={styles.cardTitle}>P95 Latency</span>
           <div className={styles.iconWrapper}>
@@ -100,7 +101,7 @@ export default function MetricsGrid({ metrics }: MetricsGridProps) {
             95% of requests complete within this budget
           </span>
         </div>
-      </div>
+      </GlowCard>
     </div>
   );
 }
