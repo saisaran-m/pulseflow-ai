@@ -15,7 +15,7 @@ export default function Navigation({ children }: NavigationProps) {
   const pathname = usePathname();
 
   const menuItems = [
-    { name: 'Dashboard', path: '/', icon: Activity },
+    { name: 'Dashboard', path: '/dashboard', icon: Activity },
     { name: 'Request Tracer', path: '/logs', icon: ListFilter },
     { name: 'Traffic Sandbox', path: '/sandbox', icon: PlayCircle },
     { name: 'Alert Center', path: '/alerts', icon: Bell }
@@ -25,12 +25,12 @@ export default function Navigation({ children }: NavigationProps) {
     <div style={{ minHeight: '100vh', position: 'relative' }}>
       {/* 1. Sidebar Navigation */}
       <aside className={styles.sidebar}>
-        <div className={styles.brand}>
+        <Link href="/" className={styles.brand} style={{ textDecoration: 'none', display: 'flex', width: '100%' }}>
           <div className={styles.logoGlow}>
             <Terminal size={18} />
           </div>
           <span className={styles.brandName}>PulseFlow AI</span>
-        </div>
+        </Link>
 
         <nav className={styles.menu}>
           {menuItems.map((item) => {
