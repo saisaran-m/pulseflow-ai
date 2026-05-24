@@ -20,9 +20,14 @@
   --text-secondary: #9CA3AF; /* Cool grey */
   --text-muted: #6B7280;     /* Dimmed grey */
   
-  /* Glowing Neon Accents */
+  /* Glowing Neon Indigo Accents */
   --color-primary: #6366F1;       /* Electric Indigo */
   --color-primary-glow: rgba(99, 102, 241, 0.15);
+
+  /* Glowing Accent Cyan Hierarchy */
+  --color-cyan: #00C8FF;          /* High Contrast Cyan */
+  --color-cyan-glow: rgba(0, 200, 255, 0.3);
+  --color-cyan-gradient: linear-gradient(135deg, #00C8FF 0%, #6366F1 100%);
   
   /* HTTP Status Code Specific Palette */
   --status-2xx: #10B981;          /* Emerald Green - Success */

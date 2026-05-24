@@ -106,12 +106,15 @@ export default function Navigation({ children }: NavigationProps) {
           @keyframes spin {
             to { transform: rotate(360deg); }
           }
-          @keyframes skeleton-pulse {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 0.9; }
+          @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
           }
           .pulse-skeleton {
-            animation: skeleton-pulse 1.8s infinite ease-in-out;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.02) 25%, rgba(255, 255, 255, 0.09) 50%, rgba(255, 255, 255, 0.02) 75%) !important;
+            background-size: 200% 100% !important;
+            animation: shimmer 1.6s infinite linear !important;
+            border-color: rgba(255, 255, 255, 0.04) !important;
           }
         `}} />
       </div>

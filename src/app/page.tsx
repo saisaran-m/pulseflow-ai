@@ -117,24 +117,21 @@ export default function LandingPage() {
         </div>
 
         <div className={styles.navLinks}>
-          <Link href="/docs" className={styles.navLink}>
+          <a href="https://github.com/saisaran-m/pulseflow-ai#readme" target="_blank" rel="noopener noreferrer" className={styles.navLink}>
             Documentation
-          </Link>
-          <Link href="/architecture" className={styles.navLink}>
-            Architecture
-          </Link>
-          <a href="https://github.com/saisaran-m/pulseflow-ai" target="_blank" rel="noreferrer" className={styles.starBadge}>
-            <GithubIcon size={14} style={{ color: '#a855f7' }} />
-            <span>★ 148 Stars</span>
+          </a>
+          <a href="https://github.com/saisaran-m/pulseflow-ai" target="_blank" rel="noopener noreferrer" className={styles.starBadge}>
+            <GithubIcon size={14} style={{ color: 'var(--color-cyan)' }} />
+            <span>★ 1.4k Stars</span>
           </a>
         </div>
       </nav>
 
       {/* 2. Cyberpunk Hero Section */}
       <header className={styles.heroSection}>
-        <div className={styles.badge} style={{ borderColor: 'rgba(99, 102, 241, 0.4)', backgroundColor: 'rgba(99, 102, 241, 0.08)', color: 'var(--color-primary)' }}>
+        <div className={styles.badge} style={{ borderColor: 'rgba(0, 200, 255, 0.4)', backgroundColor: 'rgba(0, 200, 255, 0.08)', color: 'var(--color-cyan)' }}>
           <Cpu size={12} className="glow-primary" />
-          <span>100% Free & Open-Source DevOps Sandbox</span>
+          <span>100% Free & Open-Source • Apache 2.0 License</span>
         </div>
 
         <h1 className={styles.headline}>
@@ -146,20 +143,46 @@ export default function LandingPage() {
           Monitor real-time serverless PostgreSQL database telemetry, track SRE latency metrics, and diagnose severe Java stack trace crashes instantly using AI.
         </p>
 
+        {/* Dynamic Shields.io badges for robust social proof */}
+        <div style={{ display: 'flex', gap: '12px', alignItems: 'center', marginBottom: '32px', flexWrap: 'wrap', justifyContent: 'center', animation: 'scaleUpFadeIn 0.75s ease both' }}>
+          <a href="https://github.com/saisaran-m/pulseflow-ai" target="_blank" rel="noopener noreferrer">
+            <img src="https://img.shields.io/github/stars/saisaran-m/pulseflow-ai?style=for-the-badge&logo=github&color=00C8FF&logoColor=ffffff&labelColor=0d1117" alt="GitHub Stars" style={{ borderRadius: '6px', height: '28px' }} />
+          </a>
+          <a href="https://github.com/saisaran-m/pulseflow-ai" target="_blank" rel="noopener noreferrer">
+            <img src="https://img.shields.io/github/forks/saisaran-m/pulseflow-ai?style=for-the-badge&logo=github&color=6366F1&logoColor=ffffff&labelColor=0d1117" alt="GitHub Forks" style={{ borderRadius: '6px', height: '28px' }} />
+          </a>
+          <a href="https://github.com/saisaran-m/pulseflow-ai" target="_blank" rel="noopener noreferrer">
+            <img src="https://img.shields.io/github/license/saisaran-m/pulseflow-ai?style=for-the-badge&color=A855F7&labelColor=0d1117" alt="License" style={{ borderRadius: '6px', height: '28px' }} />
+          </a>
+        </div>
+
         {/* Call to Actions (CTA) with absolute visual hierarchy */}
         <div className={styles.ctaGrid}>
           <Link href="/dashboard" className={styles.primaryCta}>
             <span>Enter APM Console</span>
             <ArrowRight size={16} />
           </Link>
-          <Link href="/docs" className={styles.secondaryCta}>
+          <a href="https://github.com/saisaran-m/pulseflow-ai#readme" target="_blank" rel="noopener noreferrer" className={styles.secondaryCta}>
             <BookOpen size={16} />
             <span>Quick Start Docs</span>
-          </Link>
-          <Link href="/architecture" className={styles.secondaryCta}>
-            <Code size={16} />
-            <span>Technical Stack</span>
-          </Link>
+          </a>
+        </div>
+
+        {/* Visual Dashboard Screenshot Section (Placed directly below hero) */}
+        <h2 className={styles.sectionTitle} style={{ marginTop: '32px' }}>See PulseFlow in Action</h2>
+        <p className={styles.sectionDesc}>
+          An intuitive, beautiful, and dark-themed interface built specifically for SRE operators.
+        </p>
+        <div className={styles.previewWrapper} style={{ marginTop: '16px', marginBottom: '64px' }}>
+          <div style={{ padding: '8px 16px', borderBottom: '1px solid rgba(255, 255, 255, 0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
+            <span style={{ fontSize: '12px', fontWeight: 700, color: 'var(--color-cyan)', letterSpacing: '0.5px' }}>SEE PULSEFLOW IN ACTION</span>
+            <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>PRODUCTION APM CONSOLE PREVIEW</span>
+          </div>
+          <img 
+            src="/images/dashboard_preview.png" 
+            alt="PulseFlow AI APM Console Mockup" 
+            className={styles.previewImage}
+          />
         </div>
 
         {/* 3. Live Animated Dashboard Mockup */}
@@ -176,15 +199,15 @@ export default function LandingPage() {
             </div>
             <span className={styles.mockupTitle}>live_telemetry_terminal_dashboard</span>
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '10px', color: 'var(--status-2xx)' }}>
-              <span className="pulse-dot" style={{ display: 'inline-block', width: '6px', height: '6px', backgroundColor: 'var(--status-2xx)', borderRadius: '50%' }} />
-              <span>LIVE CLOUD FEED</span>
+              <span className={styles.pulseDot} />
+              <span>LIVE DEMO (SIMULATED TELEMETRY)</span>
             </div>
           </div>
 
           <div className={styles.mockupGrid}>
             <div className={styles.miniCard}>
               <span className={styles.miniTitle}>Throughput</span>
-              <span className={styles.miniValue} style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--color-primary)' }}>
+              <span className={styles.miniValue} style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--color-cyan)' }}>
                 <Zap size={16} className="glow-primary" />
                 <span>1.48 RPS</span>
               </span>
@@ -211,7 +234,7 @@ export default function LandingPage() {
               <div key={idx} style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
                 <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
                   <span style={{ color: 'var(--text-muted)' }}>[{log.time}]</span>
-                  <span className={styles.tPrompt} style={{ color: log.method === 'POST' ? 'var(--status-2xx)' : 'var(--color-primary)' }}>
+                  <span className={styles.tPrompt} style={{ color: log.method === 'POST' ? 'var(--status-2xx)' : 'var(--color-cyan)' }}>
                     {log.method}
                   </span>
                   <span style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-mono)' }}>{log.path}</span>
@@ -231,19 +254,17 @@ export default function LandingPage() {
               </div>
             ))}
           </div>
-        </div>
 
-        {/* Visual Dashboard Screenshot Section */}
-        <h2 className={styles.sectionTitle} style={{ marginTop: '56px' }}>See It In Action</h2>
-        <p className={styles.sectionDesc}>
-          An intuitive, beautiful, and dark-themed interface built specifically for SRE operators.
-        </p>
-        <div className={styles.previewWrapper}>
-          <img 
-            src="/images/dashboard_preview.png" 
-            alt="PulseFlow AI APM Console Mockup" 
-            className={styles.previewImage}
-          />
+          {/* Simulated demo indicator and launch CTA */}
+          <div style={{ marginTop: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px', borderTop: '1px solid rgba(255, 255, 255, 0.05)', paddingTop: '16px' }}>
+            <span style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
+              Values represent simulated live-demo metrics feed.
+            </span>
+            <Link href="/dashboard" className={styles.mockupSubCta}>
+              <span>Launch Your Own APM Console</span>
+              <ArrowRight size={14} />
+            </Link>
+          </div>
         </div>
 
         {/* 4. Features Section Grid */}
@@ -337,270 +358,16 @@ export default function LandingPage() {
         </div>
       </header>
 
-      {/* 5. Sleek Technical Modals */}
-      {activeModal === 'docs' && (
-        <div className={styles.modalOverlay} onClick={() => setActiveModal(null)}>
-          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-            <div className={styles.modalHeader}>
-              <div className={styles.modalTitle}>
-                <BookOpen size={16} />
-                <span>Developer Documentation</span>
-              </div>
-              <X size={18} className={styles.modalClose} onClick={() => setActiveModal(null)} />
-            </div>
-            <div className={styles.modalContent}>
-              <div className={styles.modalSection}>
-                <span className={styles.modalLabel}>Database Schema DDL Setup</span>
-                <span className={styles.modalValue}>
-                  Since local ISPs block port `5432`, you can set up the tables directly in the Neon SQL Editor using secure WebSockets:
-                </span>
-                <div className={styles.terminalBlock}>
-                  {`https://pulseflow-ai-hub.vercel.app/api/init-db`}
-                </div>
-              </div>
-              <div className={styles.modalSection}>
-                <span className={styles.modalLabel}>Vercel Environment Variables</span>
-                <span className={styles.modalValue}>
-                  Add the following environment variables to your Vercel project dashboard Settings:
-                </span>
-                <div className={styles.terminalBlock}>
-                  {`DATABASE_URL="postgresql://neondb_owner:***@ep-***.neon.tech/neondb?sslmode=require"\nGEMINI_API_KEY="AIzaSy***"`}
-                </div>
-              </div>
-              <div className={styles.modalSection}>
-                <span className={styles.modalLabel}>Autopilot Telemetry Simulation</span>
-                <span className={styles.modalValue}>
-                  Open the Traffic Sandbox inside your deployed console and switch Autopilot ON. This seeds live logs into Neon PostgreSQL every 3 seconds automatically!
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {activeModal === 'tech' && (
-        <div className={styles.modalOverlay} onClick={() => setActiveModal(null)}>
-          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-            <div className={styles.modalHeader}>
-              <div className={styles.modalTitle}>
-                <Code size={16} />
-                <span>Architecture & Tech Stack</span>
-              </div>
-              <X size={18} className={styles.modalClose} onClick={() => setActiveModal(null)} />
-            </div>
-            <div className={styles.modalContent}>
-              <div className={styles.modalSection}>
-                <span className={styles.modalLabel}>Frontend Architecture</span>
-                <span className={styles.modalValue}>
-                  Next.js App Router (React 19), styled with Vanilla CSS Modules, and enhanced with floating plexus HTML5 WebGL canvas layouts.
-                </span>
-              </div>
-              <div className={styles.modalSection}>
-                <span className={styles.modalLabel}>Database & Client Engine</span>
-                <span className={styles.modalValue}>
-                  Prisma ORM (v6.19.3) configured with a serverless PostgreSQL client connecting to Neon Serverless database fleet. Includes performance single and multi-column indexes on log timestamps and path queries.
-                </span>
-              </div>
-              <div className={styles.modalSection}>
-                <span className={styles.modalLabel}>Generative AI Diagnostics</span>
-                <span className={styles.modalValue}>
-                  Utilizes Google Gemini Pro API via Next.js serverless routes, feeding route traceback logs, exception payloads, and SRE context dynamically to produce instant patched code blocks.
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {activeModal === 'contact' && (
-        <div className={styles.modalOverlay} onClick={() => setActiveModal(null)}>
-          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-            <div className={styles.modalHeader}>
-              <div className={styles.modalTitle}>
-                <Terminal size={16} />
-                <span>Contact SRE Command</span>
-              </div>
-              <X size={18} className={styles.modalClose} onClick={() => setActiveModal(null)} />
-            </div>
-            
-            {contactSubmitted ? (
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', padding: '20px 0', gap: '12px' }}>
-                <div style={{ width: '40px', height: '40px', borderRadius: '50%', backgroundColor: 'rgba(16, 185, 129, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--status-2xx)', boxShadow: '0 0 15px rgba(16, 185, 129, 0.2)', margin: '0 auto' }}>
-                  <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5" style={{ margin: 'auto' }}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <h3 style={{ fontSize: '16px', fontWeight: 700, color: 'var(--text-primary)' }}>Operator Dispatch Confirmed</h3>
-                <p style={{ fontSize: '12.5px', color: 'var(--text-secondary)', lineHeight: 1.5, maxWidth: '340px' }}>
-                  Your encrypted support ticket has been registered in the Neon cloud node. An SRE response technician will contact you shortly.
-                </p>
-                <button type="button" onClick={() => setActiveModal(null)} className={styles.primaryCta} style={{ padding: '8px 20px', fontSize: '12px', marginTop: '10px' }}>
-                  Close Connection
-                </button>
-              </div>
-            ) : (
-              <form onSubmit={handleContactSubmit} className={styles.modalContent}>
-                <div className={styles.modalSection}>
-                  <label htmlFor="modal-email" className={styles.modalLabel}>SRE Email Address</label>
-                  <input 
-                    id="modal-email"
-                    type="email" 
-                    required 
-                    placeholder="operator@domain.com"
-                    value={contactEmail}
-                    onChange={(e) => setContactEmail(e.target.value)}
-                    style={{
-                      width: '100%',
-                      backgroundColor: 'rgba(0, 0, 0, 0.3)',
-                      border: '1px solid var(--border-subtle)',
-                      borderRadius: '8px',
-                      padding: '10px 12px',
-                      color: 'var(--text-primary)',
-                      outline: 'none',
-                      fontSize: '13px'
-                    }}
-                  />
-                </div>
-                
-                <div className={styles.modalSection}>
-                  <label htmlFor="modal-role" className={styles.modalLabel}>Operational Role</label>
-                  <select
-                    id="modal-role"
-                    value={contactRole}
-                    onChange={(e) => setContactRole(e.target.value)}
-                    style={{
-                      width: '100%',
-                      backgroundColor: 'rgba(0, 0, 0, 0.3)',
-                      border: '1px solid var(--border-subtle)',
-                      borderRadius: '8px',
-                      padding: '10px 12px',
-                      color: 'var(--text-primary)',
-                      outline: 'none',
-                      fontSize: '13px'
-                    }}
-                  >
-                    <option value="SRE">Site Reliability Engineer (SRE)</option>
-                    <option value="DevOps">DevOps Platform Architect</option>
-                    <option value="Developer">Application Developer</option>
-                    <option value="Student">System Evaluator</option>
-                  </select>
-                </div>
-                
-                <div className={styles.modalSection}>
-                  <label htmlFor="modal-message" className={styles.modalLabel}>Incident Description / Message</label>
-                  <textarea 
-                    id="modal-message"
-                    required 
-                    rows={4} 
-                    placeholder="Describe your serverless query bottleneck or SRE support requirement..."
-                    value={contactMessage}
-                    onChange={(e) => setContactMessage(e.target.value)}
-                    style={{
-                      width: '100%',
-                      backgroundColor: 'rgba(0, 0, 0, 0.3)',
-                      border: '1px solid var(--border-subtle)',
-                      borderRadius: '8px',
-                      padding: '10px 12px',
-                      color: 'var(--text-primary)',
-                      outline: 'none',
-                      fontSize: '13px',
-                      resize: 'none'
-                    }}
-                  />
-                </div>
-                
-                <button 
-                  type="submit" 
-                  disabled={contactSubmitting}
-                  className={styles.primaryCta} 
-                  style={{ width: '100%', justifyContent: 'center', padding: '12px' }}
-                >
-                  {contactSubmitting ? 'Transmitting Package...' : 'Dispatch Ticket'}
-                </button>
-              </form>
-            )}
-          </div>
-        </div>
-      )}
-
-      {activeModal === 'privacy' && (
-        <div className={styles.modalOverlay} onClick={() => setActiveModal(null)}>
-          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-            <div className={styles.modalHeader}>
-              <div className={styles.modalTitle}>
-                <ShieldAlert size={16} />
-                <span>Encrypted Privacy Protocol</span>
-              </div>
-              <X size={18} className={styles.modalClose} onClick={() => setActiveModal(null)} />
-            </div>
-            <div className={styles.modalContent} style={{ maxHeight: '350px', overflowY: 'auto', paddingRight: '8px' }}>
-              <div className={styles.modalSection}>
-                <span className={styles.modalLabel}>1. Telemetry Collection</span>
-                <span className={styles.modalValue}>
-                  PulseFlow AI is engineered as a secure DevOps APM sandbox. We collect metadata including HTTP request durations, status code classes, path endpoints, and compiler exception stack traces.
-                </span>
-              </div>
-              <div className={styles.modalSection}>
-                <span className={styles.modalLabel}>2. Zero Sensitive PII Retention</span>
-                <span className={styles.modalValue}>
-                  All request payloads and database rows are generated programmatically or securely sanitized in serverless route layers before processing. We do not store real-world passwords, payment accounts, or identifiable keys.
-                </span>
-              </div>
-              <div className={styles.modalSection}>
-                <span className={styles.modalLabel}>3. Generative Diagnostic Auditing</span>
-                <span className={styles.modalValue}>
-                  Exceptions selected for SRE co-pilot reviews are processed via stateless API boundaries. Stack trace data is fed to Google Gemini models exclusively to compile localized diagnostic recommendation code patches.
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {activeModal === 'terms' && (
-        <div className={styles.modalOverlay} onClick={() => setActiveModal(null)}>
-          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-            <div className={styles.modalHeader}>
-              <div className={styles.modalTitle}>
-                <Code size={16} />
-                <span>Service Level SLA Terms</span>
-              </div>
-              <X size={18} className={styles.modalClose} onClick={() => setActiveModal(null)} />
-            </div>
-            <div className={styles.modalContent} style={{ maxHeight: '350px', overflowY: 'auto', paddingRight: '8px' }}>
-              <div className={styles.modalSection}>
-                <span className={styles.modalLabel}>1. Evaluation SLA</span>
-                <span className={styles.modalValue}>
-                  This platform is provided exclusively for portfolio evaluation, interview showcase, and SaaS traffic simulation tests. Standard serverless PostgreSQL compute limits are governed by Neon Cloud tiers.
-                </span>
-              </div>
-              <div className={styles.modalSection}>
-                <span className={styles.modalLabel}>2. Autopilot Simulation Policies</span>
-                <span className={styles.modalValue}>
-                  Sandbox traffic autopilot loops inject a maximum of 1 log query every 3 seconds to preserve database resources. High-volume custom concurrent stress tests must be launched responsibly.
-                </span>
-              </div>
-              <div className={styles.modalSection}>
-                <span className={styles.modalLabel}>3. Code Patch Licensing</span>
-                <span className={styles.modalValue}>
-                  All software code suggestions and isolated error patches synthesized by the Gemini AI integration are provided under the Apache 2.0 Open Source framework, granting unrestricted rights for reuse and editing.
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* Global Footer */}
       <footer className={styles.footer}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', textAlign: 'left' }}>
           <span>v1.2.0 • PulseFlow AI Cloud Observability Hub</span>
-          <span>Developed by saisaran-m • Open Source Apache 2.0</span>
+          <span>Developed by saisaran-m • Open Source Apache 2.0 License</span>
         </div>
         <div style={{ display: 'flex', gap: '20px' }}>
-          <button type="button" onClick={() => { setContactSubmitted(false); setActiveModal('contact'); }} className={styles.navLink} style={{ cursor: 'pointer' }}>Contact Operator</button>
-          <button type="button" onClick={() => setActiveModal('privacy')} className={styles.navLink} style={{ cursor: 'pointer' }}>Privacy Protocol</button>
-          <button type="button" onClick={() => setActiveModal('terms')} className={styles.navLink} style={{ cursor: 'pointer' }}>SLA Terms</button>
+          <a href="mailto:saisaran0070@gmail.com" className={styles.navLink} style={{ cursor: 'pointer' }}>
+            Contact Operator
+          </a>
         </div>
       </footer>
     </div>

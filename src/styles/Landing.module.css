@@ -160,33 +160,36 @@
 }
 
 .primaryCta {
-  background: var(--color-ai-gradient);
-  color: white;
+  background: var(--color-cyan);
+  color: #060913;
   padding: 14px 28px;
   border-radius: 8px;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 800;
   display: flex;
   align-items: center;
   gap: 8px;
   text-decoration: none;
-  box-shadow: 0 4px 25px rgba(168, 85, 247, 0.45);
-  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 200, 255, 0.35);
+  border: 1px solid var(--color-cyan);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .primaryCta:hover {
+  background: #33d3ff;
+  border-color: #33d3ff;
   transform: translateY(-2px);
-  box-shadow: 0 6px 30px rgba(168, 85, 247, 0.6);
+  box-shadow: 0 6px 25px rgba(0, 200, 255, 0.55);
 }
 
 .secondaryCta {
-  background-color: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--border-subtle);
-  color: var(--text-primary);
+  background-color: transparent;
+  border: 1px solid var(--color-cyan);
+  color: var(--color-cyan);
   padding: 14px 24px;
   border-radius: 8px;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -195,9 +198,56 @@
 }
 
 .secondaryCta:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.15);
+  background-color: rgba(0, 200, 255, 0.08);
+  border-color: #33d3ff;
+  color: #33d3ff;
+  box-shadow: 0 0 15px rgba(0, 200, 255, 0.15);
 }
+
+/* Pulsing Green Live Demo Dot */
+@keyframes pulseDot {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+.pulseDot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  background-color: var(--status-2xx);
+  border-radius: 50%;
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+/* Mockup Terminal Sub-CTA */
+.mockupSubCta {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--color-cyan);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.mockupSubCta:hover {
+  color: #33d3ff;
+  border-color: #33d3ff;
+  transform: translateX(2px);
+}
+
 
 /* 3. Interactive APM Mockup */
 .mockupWrapper {

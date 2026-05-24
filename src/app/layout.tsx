@@ -15,8 +15,31 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://pulseflow-ai-hub.vercel.app'),
   title: "PulseFlow AI | SRE Observability & Diagnostics Hub",
-  description: "PulseFlow AI monitors your serverless infrastructure in real time, using Gemini AI to diagnose crashes and alert your SRE team instantly.",
+  description: "PulseFlow AI monitors your serverless infrastructure in real time and uses Gemini AI to diagnose crashes instantly.",
+  openGraph: {
+    title: "PulseFlow AI | SRE Observability & Diagnostics Hub",
+    description: "PulseFlow AI monitors your serverless infrastructure in real time and uses Gemini AI to diagnose crashes instantly.",
+    url: "https://pulseflow-ai-hub.vercel.app",
+    siteName: "PulseFlow AI",
+    images: [
+      {
+        url: "/images/og_image.png",
+        width: 1200,
+        height: 630,
+        alt: "PulseFlow AI SRE Diagnostics Console",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "PulseFlow AI | SRE Observability & Diagnostics Hub",
+    description: "PulseFlow AI monitors your serverless infrastructure in real time and uses Gemini AI to diagnose crashes instantly.",
+    images: ["/images/og_image.png"],
+  },
 };
 
 export default function RootLayout({
